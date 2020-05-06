@@ -22,6 +22,11 @@ EXTRA_CFLAGS += -DTFA9874_NONDSP_STEREO
 EXTRA_CFLAGS += -Isound/soc/codecs/inc
 EXTRA_CFLAGS += -Werror
 
+# Ignore these clang warnings!
+ifeq ($(cc-name),clang)
+EXTRA_CFLAGS += $(call cc-disable-warning,enum-conversion,)
+endif
+
 ifeq ($(CONFIG_RIVER_DTB), y)
 cirrus_madera-objs = madera.o madera-slimbus.o
 obj-y += cirrus_madera.o
